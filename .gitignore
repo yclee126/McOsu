@@ -1,9 +1,9 @@
-Windows Release/
-Windows Debug/
-build/
-libraries/
+/Windows Release/
+/Windows Debug/
+/build/
+/libraries/
 
-src/*
-!src/App/
-src/App/*
-!src/App/Osu/
+/src/*
+!/src/App/
+/src/App/*
+!/src/App/Osu/
