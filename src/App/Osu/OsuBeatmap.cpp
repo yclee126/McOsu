@@ -216,6 +216,7 @@ OsuBeatmap::OsuBeatmap(Osu *osu)
 	m_iCurrentNumCircles = 0;
 
 	m_iPreviousFollowPointObjectIndex = -1;
+	m_circleTypeIndex = -1;
 }
 
 OsuBeatmap::~OsuBeatmap()
