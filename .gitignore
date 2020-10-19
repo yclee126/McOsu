@@ -1,3 +1,4 @@
+<<<<<<< Upstream, based on origin/master
 /Windows Release/
 /Windows Debug/
 /build/
@@ -11,3 +12,14 @@
 /.project
 /.cproject
 /.settings/
+=======
+/Windows Release/
+/Windows Debug/
+/build/
+/libraries/
+
+/src/*
+!/src/App/
+/src/App/*
+!/src/App/Osu/
+>>>>>>> e8b5cfe gitignore2
