@@ -1,12 +1,18 @@
 /Windows Release/
 /Windows Debug/
-/build/
 /libraries/
 
 /src/*
 !/src/App/
 /src/App/*
 !/src/App/Osu/
+
+/build/*
+!/build/materials/
+/build/materials/*
+!/build/materials/default/
+/build/materials/default/*
+!/build/materials/default/hitcircle*
 
 /.*
 !/.gitignore
