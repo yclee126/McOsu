@@ -64,6 +64,9 @@ public:
 	inline Image *getMissingTexture() {return m_missingTexture;}
 
 	inline Image *getHitCircle() {return m_hitCircle;}
+	inline Image *getHitCircle1() {return m_hitCircle1;}
+	inline Image *getHitCircle2() {return m_hitCircle2;}
+	inline Image *getHitCircle3() {return m_hitCircle3;}
 	inline OsuSkinImage *getHitCircleOverlay2() {return m_hitCircleOverlay2;}
 	inline Image *getApproachCircle() {return m_approachCircle;}
 	inline Image *getReverseArrow() {return m_reverseArrow;}
@@ -359,6 +362,9 @@ private:
 
 	// images
 	Image *m_hitCircle;
+	Image *m_hitCircle1;
+	Image *m_hitCircle2;
+	Image *m_hitCircle3;
 	OsuSkinImage *m_hitCircleOverlay2;
 	Image *m_approachCircle;
 	Image *m_reverseArrow;
@@ -594,6 +600,9 @@ private:
 	bool m_bApproachCircle2x;
 	bool m_bReverseArrow2x;
 	bool m_bHitCircle2x;
+	bool m_bHitCircle1_2x;
+	bool m_bHitCircle2_2x;
+	bool m_bHitCircle3_2x;
 	bool m_bIsDefault02x;
 	bool m_bIsDefault12x;
 	bool m_bSpinnerApproachCircle2x;

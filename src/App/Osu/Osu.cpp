@@ -4,7 +4,7 @@
 //
 // $NoKeywords: $osu
 //===============================================================================//
-
+//#define DEBUG_STD
 #include "OsuDatabase.h"
 #include "Osu.h"
 
@@ -506,10 +506,11 @@ Osu::Osu(Osu2 *osu2, int instanceID)
 
 
 
-	/*
-	// DEBUG: immediately start diff of a beatmap
-	UString debugFolder = "H:/Program Files (x86)/osu!/Songs/41823 The Quick Brown Fox - The Big Black/";
-	UString debugDiffFileName = "The Quick Brown Fox - The Big Black (Blue Dragon) [WHO'S AFRAID OF THE BIG BLACK].osu";
+
+	// DEBUG: immediately start diff of a beatmap - STD
+#ifdef DEBUG_STD
+	UString debugFolder = "C:\\Users\\YeongChan\\AppData\\Local\\osu!\\Songs\\530173 Nekomata Master - Greening\\";
+	UString debugDiffFileName = "Nekomata Master - Greening (Lulu-) [Stan's Hard].osu";
 	OsuBeatmap *debugBeatmap = new OsuBeatmapStandard(this);
 	UString beatmapPath = debugFolder;
 	beatmapPath.append(debugDiffFileName);
@@ -528,12 +529,12 @@ Osu::Osu(Osu2 *osu2, int instanceID)
 
 		// this will leak memory (one OsuBeatmap object and one OsuBeatmapDifficulty object), but who cares (since debug only)
 	}
-	*/
-
-	// DEBUG: immediately start diff of a beatmap
+#endif
 	/*
-	UString debugFolder = "c:/Program Files (x86)/osu!/Songs/407186 S3RL feat Krystal - R4V3 B0Y/";
-	UString debugDiffFileName = "S3RL feat Krystal - R4V3 B0Y (Draftnell) [BANGKE's 4K Normal].osu";
+	// DEBUG: immediately start diff of a beatmap - MANIA
+
+	UString debugFolder = "C:/Users/YeongChan/OneDrive/Desktop/osunia_pjt/McEngine/build/songs/530173 Nekomata Master - Greening/";
+	UString debugDiffFileName = "Nekomata Master - Greening (Lulu-) [Nokashi's Insane].osu";
 	OsuBeatmap *debugBeatmap = new OsuBeatmapMania(this);
 	UString beatmapPath = debugFolder;
 	beatmapPath.append(debugDiffFileName);
@@ -2315,6 +2316,55 @@ void Osu::onKey1Change(bool pressed, bool mouse)
 			if (osu_disable_mousebuttons.getBool())
 				m_bMouseKey1Down = false;
 
+			m_hud->animateInputoverlay(mouse ? 3 : 1, pressed);
+
+			int curCircleType = getSelectedBeatmap()->getCurrentHitObjectCircleType(); // cursor not on circle also returns type 0 to prevent shaking action triggered on click on empty space
+			if (getSelectedBeatmap()->isNewHitObjectCircleType())
+				m_curKeys = 0;
+
+			if (pressed)
+			{
+				getSelectedBeatmap()->addKeyCount(mouse ? 3 : 1);
+
+				switch (curCircleType)
+				{
+				case 0:
+					break;
+				case 1:
+					break;
+				case 2:
+					getSelectedBeatmap()->setShakeCurrentHitObjectCircleType();
+					return;
+				case 3:
+					if (m_curKeys & 2)
+					{
+						getSelectedBeatmap()->resetShakeCurrentHitObjectCircleType();
+						break;
+					}
+					else
+					{
+						m_curKeys |= 1;
+						getSelectedBeatmap()->setShakeCurrentHitObjectCircleType();
+						return;
+					}
+				}
+			}
+			else
+			{
+				switch (curCircleType)
+				{
+				case 0:
+					break;
+				case 1:
+					break;
+				case 2:
+					break;
+				case 3:
+					m_curKeys &= ~1;
+					break;
+				}
+			}
+
 			if (pressed && !(m_bKeyboardKey1Down && m_bMouseKey1Down) && !getSelectedBeatmap()->isPaused()) // see above note
 				getSelectedBeatmap()->keyPressed1(mouse);
 			else if (!m_bKeyboardKey1Down && !m_bMouseKey1Down)
@@ -2352,6 +2402,55 @@ void Osu::onKey2Change(bool pressed, bool mouse)
 			// quickfix
 			if (osu_disable_mousebuttons.getBool())
 				m_bMouseKey2Down = false;
+
+			m_hud->animateInputoverlay(mouse ? 4 : 2, pressed);
+
+			int curCircleType = getSelectedBeatmap()->getCurrentHitObjectCircleType(); // cursor not on circle also returns type 0 to prevent shaking action triggered on click on empty space
+			if (getSelectedBeatmap()->isNewHitObjectCircleType())
+				m_curKeys = 0;
+
+			if (pressed)
+			{
+				getSelectedBeatmap()->addKeyCount(mouse ? 4 : 2);
+
+				switch (curCircleType)
+				{
+				case 0:
+					break;
+				case 1:
+					getSelectedBeatmap()->setShakeCurrentHitObjectCircleType();
+					return;
+				case 2:
+					break;
+				case 3:
+					if (m_curKeys & 1)
+					{
+						getSelectedBeatmap()->resetShakeCurrentHitObjectCircleType();
+						break;
+					}
+					else
+					{
+						m_curKeys |= 2;
+						getSelectedBeatmap()->setShakeCurrentHitObjectCircleType();
+						return;
+					}
+				}
+			}
+			else
+			{
+				switch (curCircleType)
+				{
+				case 0:
+					break;
+				case 1:
+					break;
+				case 2:
+					break;
+				case 3:
+					m_curKeys &= ~2;
+					break;
+				}
+			}
 
 			if (pressed && !(m_bKeyboardKey2Down && m_bMouseKey2Down) && !getSelectedBeatmap()->isPaused()) // see above note
 				getSelectedBeatmap()->keyPressed2(mouse);

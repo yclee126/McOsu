@@ -79,6 +79,9 @@ OsuSkin::OsuSkin(Osu *osu, UString name, UString filepath, bool isDefaultSkin, b
 
 	// vars
 	m_hitCircle = m_missingTexture;
+	m_hitCircle1 = m_missingTexture;
+	m_hitCircle2 = m_missingTexture;
+	m_hitCircle3 = m_missingTexture;
 	m_approachCircle = m_missingTexture;
 	m_reverseArrow = m_missingTexture;
 
@@ -481,6 +484,9 @@ void OsuSkin::load()
 	// images
 	randomizeFilePath();
 	checkLoadImage(&m_hitCircle, "hitcircle", "OSU_SKIN_HITCIRCLE");
+	checkLoadImage(&m_hitCircle1, "hitcircle1", "OSU_SKIN_HITCIRCLE1");
+	checkLoadImage(&m_hitCircle2, "hitcircle2", "OSU_SKIN_HITCIRCLE2");
+	checkLoadImage(&m_hitCircle3, "hitcircle3", "OSU_SKIN_HITCIRCLE3");
 	m_hitCircleOverlay2 = createOsuSkinImage("hitcircleoverlay", Vector2(128, 128), 64);
 	m_hitCircleOverlay2->setAnimationFramerate(2);
 
@@ -784,8 +790,16 @@ void OsuSkin::load()
 		m_bApproachCircle2x = true;
 	if (m_reverseArrow != NULL && m_reverseArrow->getFilePath().find("@2x") != -1)
 		m_bReverseArrow2x = true;
+
 	if (m_hitCircle != NULL && m_hitCircle->getFilePath().find("@2x") != -1)
 		m_bHitCircle2x = true;
+	if (m_hitCircle1 != NULL && m_hitCircle1->getFilePath().find("@2x") != -1)
+		m_bHitCircle1_2x = true;
+	if (m_hitCircle2 != NULL && m_hitCircle2->getFilePath().find("@2x") != -1)
+		m_bHitCircle2_2x = true;
+	if (m_hitCircle3 != NULL && m_hitCircle3->getFilePath().find("@2x") != -1)
+		m_bHitCircle3_2x = true;
+
 	if (m_default0 != NULL && m_default0->getFilePath().find("@2x") != -1)
 		m_bIsDefault02x = true;
 	if (m_default1 != NULL && m_default1->getFilePath().find("@2x") != -1)

@@ -1083,6 +1083,12 @@ void OsuBeatmap::skipEmptySection()
 	engine->getSound()->play(m_osu->getSkin()->getMenuHit());
 }
 
+void OsuBeatmap::addKeyCount(int key)
+{
+	if (!m_bInBreak && !m_bIsInSkippableSection && m_bIsPlaying && !m_bFailed)
+		m_osu->getScore()->addKeyCount(key);
+}
+
 void OsuBeatmap::keyPressed1(bool mouse)
 {
 	if (m_bContinueScheduled)
@@ -1100,9 +1106,9 @@ void OsuBeatmap::keyPressed1(bool mouse)
 	}
 
 	// key overlay & counter
-	m_osu->getHUD()->animateInputoverlay(mouse ? 3 : 1, true);
-	if (!m_bInBreak && !m_bIsInSkippableSection && m_bIsPlaying && !m_bFailed)
-		m_osu->getScore()->addKeyCount(mouse ? 3 : 1);
+	//m_osu->getHUD()->animateInputoverlay(mouse ? 3 : 1, true);
+
+	//MOVED TO OsuBeatmap::addKeyCount
 
 	// lock asap
 #ifdef MCENGINE_FEATURE_MULTITHREADING
@@ -1120,6 +1126,7 @@ void OsuBeatmap::keyPressed1(bool mouse)
 	CLICK click;
 	click.musicPos = m_iCurMusicPosWithOffsets;
 	click.maniaColumn = -1;
+	click.osuKey = 1;
 
 	m_clicks.push_back(click);
 }
@@ -1141,9 +1148,9 @@ void OsuBeatmap::keyPressed2(bool mouse)
 	}
 
 	// key overlay & counter
-	m_osu->getHUD()->animateInputoverlay(mouse ? 4 : 2, true);
-	if (!m_bInBreak && !m_bIsInSkippableSection && m_bIsPlaying && !m_bFailed)
-		m_osu->getScore()->addKeyCount(mouse ? 4 : 2);
+	//m_osu->getHUD()->animateInputoverlay(mouse ? 4 : 2, true);
+
+	//MOVED TO OsuBeatmap::addKeyCount
 
 	// lock asap
 #ifdef MCENGINE_FEATURE_MULTITHREADING
@@ -1161,6 +1168,7 @@ void OsuBeatmap::keyPressed2(bool mouse)
 	CLICK click;
 	click.musicPos = m_iCurMusicPosWithOffsets;
 	click.maniaColumn = -1;
+	click.osuKey = 2;
 
 	m_clicks.push_back(click);
 }
@@ -1170,8 +1178,8 @@ void OsuBeatmap::keyReleased1(bool mouse)
 	if (m_osu->isInVRMode() && !m_osu_vr_draw_desktop_playfield_ref->getBool()) return;
 
 	// key overlay
-	m_osu->getHUD()->animateInputoverlay(1, false);
-	m_osu->getHUD()->animateInputoverlay(3, false);
+	//m_osu->getHUD()->animateInputoverlay(1, false);
+	//m_osu->getHUD()->animateInputoverlay(3, false);
 
 	m_bClick1Held = false;
 }
@@ -1181,8 +1189,8 @@ void OsuBeatmap::keyReleased2(bool mouse)
 	if (m_osu->isInVRMode() && !m_osu_vr_draw_desktop_playfield_ref->getBool()) return;
 
 	// key overlay
-	m_osu->getHUD()->animateInputoverlay(2, false);
-	m_osu->getHUD()->animateInputoverlay(4, false);
+	//m_osu->getHUD()->animateInputoverlay(2, false);
+	//m_osu->getHUD()->animateInputoverlay(4, false);
 
 	m_bClick2Held = false;
 }
@@ -2244,4 +2252,38 @@ unsigned long OsuBeatmap::getMusicPositionMSInterpolated()
 
 		return returnPos;
 	}
+}
+
+int OsuBeatmap::getCurrentHitObjectCircleType()
+{
+	for (int i=0; i<m_hitobjects.size(); i++)
+	{
+		if (!m_hitobjects[i]->isFinished())
+		{
+			m_circleTypeIndex = i;
+			return m_hitobjects[i]->getCircleType();
+		}
+	}
+	return 0;
+}
+
+bool OsuBeatmap::isNewHitObjectCircleType()
+{
+	static int prevCircleTypeIndex = -1;
+	if (m_circleTypeIndex != prevCircleTypeIndex)
+	{
+		prevCircleTypeIndex = m_circleTypeIndex;
+		return true;
+	}
+	return false;
+}
+
+void OsuBeatmap::setShakeCurrentHitObjectCircleType()
+{
+	m_hitobjects[m_circleTypeIndex]->setShakeAnimation();
+}
+
+void OsuBeatmap::resetShakeCurrentHitObjectCircleType()
+{
+	m_hitobjects[m_circleTypeIndex]->resetShakeAnimation();
 }

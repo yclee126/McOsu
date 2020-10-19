@@ -123,10 +123,11 @@ ConVar osu_hud_volume_size_multiplier("osu_hud_volume_size_multiplier", 1.5f);
 ConVar osu_hud_scoreboard_scale("osu_hud_scoreboard_scale", 1.0f);
 ConVar osu_hud_scoreboard_offset_y_percent("osu_hud_scoreboard_offset_y_percent", 0.11f);
 ConVar osu_hud_scoreboard_use_menubuttonbackground("osu_hud_scoreboard_use_menubuttonbackground", true);
+ConVar osu_hud_inputoverlay_horizontal_layout("osu_hud_inputoverlay_horizontal_layout", false);
 ConVar osu_hud_inputoverlay_scale("osu_hud_inputoverlay_scale", 1.0f);
-ConVar osu_hud_inputoverlay_anim_scale_duration("osu_hud_inputoverlay_anim_scale_duration", 0.16f);
-ConVar osu_hud_inputoverlay_anim_scale_multiplier("osu_hud_inputoverlay_anim_scale_multiplier", 0.8f);
-ConVar osu_hud_inputoverlay_anim_color_duration("osu_hud_inputoverlay_anim_color_duration", 0.1f);
+ConVar osu_hud_inputoverlay_anim_scale_duration("osu_hud_inputoverlay_anim_scale_duration", 0.0f);
+ConVar osu_hud_inputoverlay_anim_scale_multiplier("osu_hud_inputoverlay_anim_scale_multiplier", 1.0f);
+ConVar osu_hud_inputoverlay_anim_color_duration("osu_hud_inputoverlay_anim_color_duration", 0.0f);
 ConVar osu_hud_fps_smoothing("osu_hud_fps_smoothing", true);
 ConVar osu_hud_scrubbing_timeline_strains_height("osu_hud_scrubbing_timeline_strains_height", 200.0f);
 ConVar osu_hud_scrubbing_timeline_strains_alpha("osu_hud_scrubbing_timeline_strains_alpha", 0.4f);
@@ -2777,7 +2778,7 @@ void OsuHUD::drawInputOverlay(Graphics *g, int numK1, int numK2, int numM1, int 
 	{
 		const float textFontHeightPercent = 0.3f;
 		const Color colorIdle = COLOR(255, 255, 255, 255);
-		const Color colorKeyboard = COLOR(255, 255, 222, 0);
+		const Color colorKeyboard = COLOR(255, 0, 100, 255);
 		const Color colorMouse = COLOR(255, 248, 0, 158);
 
 		McFont *textFont = m_osu->getSongBrowserFont();

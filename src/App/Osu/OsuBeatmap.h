@@ -28,6 +28,7 @@ public:
 	{
 		long musicPos;
 		int maniaColumn;
+		int osuKey;
 	};
 
 public:
@@ -143,6 +144,13 @@ public:
 	void addScorePoints(int points, bool isSpinner = false);
 	void addHealth(double percent, bool isFromHitResult);
 	void updateTimingPoints(long curPos);
+
+	int getCurrentHitObjectCircleType();
+	bool isNewHitObjectCircleType(); // check if the current hitobject index has changed from the last time called this
+	void setShakeCurrentHitObjectCircleType();
+	void resetShakeCurrentHitObjectCircleType();
+	void addKeyCount(int key);
+
 
 	// ILLEGAL:
 	inline const std::vector<OsuHitObject*> &getHitObjectsPointer() {return m_hitobjects;}
@@ -266,6 +274,7 @@ protected:
 	int m_iND;
 	int m_iCurrentHitObjectIndex;
 	int m_iCurrentNumCircles;
+	int m_circleTypeIndex;
 
 	// custom
 	int m_iPreviousFollowPointObjectIndex; // TODO: this shouldn't be in this class

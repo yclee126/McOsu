@@ -75,6 +75,10 @@ public:
 	virtual void onKeyUpEvent(std::vector<OsuBeatmap::CLICK> &keyUps) {;}
 	virtual void onReset(long curPos);
 
+	virtual int getCircleType() {return 0;}
+	virtual void setShakeAnimation() {;}
+	virtual void resetShakeAnimation() {;}
+
 protected:
 	OsuBeatmap *m_beatmap;
 

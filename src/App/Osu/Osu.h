@@ -335,6 +335,8 @@ private:
 	float m_fPrevSeekMousePosX;
 	float m_fQuickSaveTime;
 
+	int m_curKeys = 0;
+
 	// async toggles
 	// TODO: this way of doing things is bullshit
 	bool m_bToggleModSelectionScheduled;

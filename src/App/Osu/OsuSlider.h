@@ -28,7 +28,7 @@ public:
 	};
 
 public:
-	OsuSlider(char type, int repeat, float pixelLength, std::vector<Vector2> points, std::vector<int> hitSounds, std::vector<float> ticks, float sliderTime, float sliderTimeWithoutRepeats, long time, int sampleType, int comboNumber, bool isEndOfCombo, int colorCounter, int colorOffset, OsuBeatmapStandard *beatmap);
+	OsuSlider(char type, int repeat, float pixelLength, std::vector<Vector2> points, std::vector<int> hitSounds, std::vector<float> ticks, float sliderTime, float sliderTimeWithoutRepeats, long time, int sampleType, int comboNumber, bool isEndOfCombo, int colorCounter, int colorOffset, OsuBeatmapStandard *beatmap, int circleType = 0);
 	virtual ~OsuSlider();
 
 	virtual void draw(Graphics *g);
@@ -57,6 +57,8 @@ public:
 	inline float getPixelLength() const {return m_fPixelLength;}
 	inline const std::vector<SLIDERCLICK> &getClicks() const {return m_clicks;}
 
+	virtual int getCircleType();
+
 private:
 	static ConVar *m_osu_playfield_mirror_horizontal_ref;
 	static ConVar *m_osu_playfield_mirror_vertical_ref;
@@ -82,6 +84,11 @@ private:
 	float getT(long pos, bool raw);
 
 	bool isClickHeldSlider(); // special logic to disallow hold tapping
+
+	virtual void setShakeAnimation();
+	virtual void resetShakeAnimation();
+	bool checkCursorOnCircle();
+
 
 	OsuBeatmapStandard *m_beatmap;
 
@@ -145,6 +152,11 @@ private:
 
 	VertexArrayObject *m_vao;
 	VertexArrayObject *m_vaoVR2;
+
+	int m_circleType;
+	int m_pressedKey = 0;
+	bool m_keyCheck = false;
+	float m_fShakeAnimation = 0.0f;
 };
 
 #endif

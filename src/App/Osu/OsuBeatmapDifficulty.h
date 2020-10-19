@@ -42,6 +42,7 @@ public:
 		int colorOffset;
 		bool clicked;
 		long maniaEndTime;
+		int circleType;
 	};
 
 	struct SLIDER_CLICK
@@ -63,6 +64,7 @@ public:
 		int colorOffset;
 		std::vector<Vector2> points;
 		std::vector<int> hitSounds;
+		int circleType;
 
 		float sliderTime;
 		float sliderTimeWithoutRepeats;

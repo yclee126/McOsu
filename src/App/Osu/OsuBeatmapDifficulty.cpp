@@ -891,6 +891,7 @@ bool OsuBeatmapDifficulty::loadRaw(OsuBeatmap *beatmap, std::vector<OsuHitObject
 							c.colorOffset = colorOffset;
 							c.clicked = false;
 							c.maniaEndTime = 0;
+							c.circleType = (hitSound >> 4) & 3;
 
 							hitcircles.push_back(c);
 						}
@@ -964,6 +965,7 @@ bool OsuBeatmapDifficulty::loadRaw(OsuBeatmap *beatmap, std::vector<OsuHitObject
 							s.colorCounter = colorCounter;
 							s.colorOffset = colorOffset;
 							s.points = points;
+							s.circleType = (hitSound >> 4) & 3;
 
 							// new beatmaps: slider hitsounds
 							if (tokens.size() > 8)
@@ -1259,7 +1261,7 @@ void OsuBeatmapDifficulty::buildStandardHitObjects(OsuBeatmapStandard *beatmap, 
 			c->y = clamp<int>(c->y - (int)(((rand() % OsuGameRules::OSU_COORD_HEIGHT) / 8.0f) * osu_mod_random_circle_offset_y_percent.getFloat()), 0, OsuGameRules::OSU_COORD_HEIGHT);
 		}
 
-		hitobjects->push_back(new OsuCircle(c->x, c->y, c->time, c->sampleType, c->number, false, c->colorCounter, c->colorOffset, beatmap));
+		hitobjects->push_back(new OsuCircle(c->x, c->y, c->time, c->sampleType, c->number, false, c->colorCounter, c->colorOffset, beatmap, c->circleType));
 
 		// potential convert-all-circles-to-sliders mod, have to play around more with this
 		/*
@@ -1320,7 +1322,7 @@ void OsuBeatmapDifficulty::buildStandardHitObjects(OsuBeatmapStandard *beatmap, 
 		if (osu_mod_reverse_sliders.getBool())
 			std::reverse(s->points.begin(), s->points.end());
 
-		hitobjects->push_back(new OsuSlider(s->type, s->repeat, s->pixelLength, s->points, s->hitSounds, s->ticks, s->sliderTime, s->sliderTimeWithoutRepeats, s->time, s->sampleType, s->number, false, s->colorCounter, s->colorOffset, beatmap));
+		hitobjects->push_back(new OsuSlider(s->type, s->repeat, s->pixelLength, s->points, s->hitSounds, s->ticks, s->sliderTime, s->sliderTimeWithoutRepeats, s->time, s->sampleType, s->number, false, s->colorCounter, s->colorOffset, beatmap, s->circleType));
 
 		const int repeats = std::max((s->repeat - 1), 0);
 		m_iMaxCombo += 2 + repeats + (repeats+1)*s->ticks.size(); // start/end + repeat arrow + ticks
