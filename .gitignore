@@ -2,6 +2,11 @@
 /Windows Debug/
 /libraries/
 
+/Songs/*
+!/Songs/6814 Yoshito Hirano, Yuka Tsujiyoko - Petal Meadows/
+/Songs/6814 Yoshito Hirano, Yuka Tsujiyoko - Petal Meadows/*
+!/Songs/6814 Yoshito Hirano, Yuka Tsujiyoko - Petal Meadows/*keyBinded.osu
+
 /src/*
 !/src/App/
 /src/App/*
