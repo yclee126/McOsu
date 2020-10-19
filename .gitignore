@@ -8,6 +8,5 @@
 /src/App/*
 !/src/App/Osu/
 
-/.project
-/.cproject
-/.settings/
+/.*
+!/.gitignore
