@@ -19,5 +19,5 @@
 /build/materials/default/*
 !/build/materials/default/hitcircle*
 
-/.*
+.*
 !/.gitignore
