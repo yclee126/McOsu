@@ -414,7 +414,7 @@ bool OsuBeatmapDifficulty::loadMetadataRaw(bool calculateStars, bool calculateSt
 								{
 									float verFloat;
 									sscanf(stringBuffer+verStrInd+3, "_v%f", &verFloat);
-									if (int(verFloat) > KEYBIND_VERSION)
+									if (int(verFloat) > KEYBIND_VERSION || keyBindType == 2) // Temporary blocking
 										keyBindType = 0;
 								}
 
