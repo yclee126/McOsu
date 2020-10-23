@@ -5,6 +5,7 @@
 // $NoKeywords: $osudiff
 //===============================================================================//
 
+static const int KEYBIND_VERSION = 1;
 #include "OsuBeatmapDifficulty.h"
 
 #include "Engine.h"
@@ -400,6 +401,23 @@ bool OsuBeatmapDifficulty::loadMetadataRaw(bool calculateStars, bool calculateSt
 							{
 								name = UString(stringBuffer);
 								name = name.trim();
+
+								// osu+2k mod version check
+								int verStrInd = -1;
+
+								if ((verStrInd = name.find("+2k")) != -1)
+									keyBindType = 1;
+								else if ((verStrInd = name.find("+4k")) != -1)
+									keyBindType = 2;
+
+								if (keyBindType)
+								{
+									float verFloat;
+									sscanf(stringBuffer+verStrInd+3, "_v%f", &verFloat);
+									if (int(verFloat) > KEYBIND_VERSION)
+										keyBindType = 0;
+								}
+
 							}
 
 							memset(stringBuffer, '\0', 1024);
@@ -754,6 +772,7 @@ bool OsuBeatmapDifficulty::loadRaw(OsuBeatmap *beatmap, std::vector<OsuHitObject
 		int comboNumber = 1;
 		int curBlock = -1;
 		unsigned long long timingPointSortHack = 0;
+		static const int keyBindMask[3] = {0b0, 0b11, 0b1111};
 		while (file.canRead())
 		{
 			UString uCurLine = file.readLine();
@@ -891,7 +910,7 @@ bool OsuBeatmapDifficulty::loadRaw(OsuBeatmap *beatmap, std::vector<OsuHitObject
 							c.colorOffset = colorOffset;
 							c.clicked = false;
 							c.maniaEndTime = 0;
-							c.circleType = (hitSound >> 4) & 3;
+							c.circleType = (hitSound >> 4) & keyBindMask[keyBindType];
 
 							hitcircles.push_back(c);
 						}
@@ -965,7 +984,7 @@ bool OsuBeatmapDifficulty::loadRaw(OsuBeatmap *beatmap, std::vector<OsuHitObject
 							s.colorCounter = colorCounter;
 							s.colorOffset = colorOffset;
 							s.points = points;
-							s.circleType = (hitSound >> 4) & 3;
+							s.circleType = (hitSound >> 4) & keyBindMask[keyBindType];
 
 							// new beatmaps: slider hitsounds
 							if (tokens.size() > 8)

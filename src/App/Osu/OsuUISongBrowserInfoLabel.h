@@ -42,6 +42,7 @@ public:
 	void setHP(float HP) {m_fHP = HP;}
 	void setStars(float stars) {m_fStars = stars;}
 	void setStarsRecalculating(bool recalculating) {m_bStarsRecalculating = recalculating;}
+	void setKeyBindType(int keyBindType) {m_keyBindType = keyBindType;}
 
 	void setLocalOffset(long localOffset) {m_iLocalOffset = localOffset;}
 	void setOnlineOffset(long onlineOffset) {m_iOnlineOffset = onlineOffset;}
@@ -88,6 +89,7 @@ private:
 	float m_fHP;
 	float m_fStars;
 	bool m_bStarsRecalculating;
+	int m_keyBindType;
 
 	long m_iLocalOffset;
 	long m_iOnlineOffset;

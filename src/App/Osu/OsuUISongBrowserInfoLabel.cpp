@@ -55,6 +55,7 @@ OsuUISongBrowserInfoLabel::OsuUISongBrowserInfoLabel(Osu *osu, float xPos, float
 	m_fHP = 5.0f;
 	m_fStars = 5.0f;
 	m_bStarsRecalculating = false;
+	m_keyBindType = 0;
 
 	m_iLocalOffset = 0;
 	m_iOnlineOffset = 0;
@@ -223,6 +224,7 @@ void OsuUISongBrowserInfoLabel::setFromBeatmap(OsuBeatmap *beatmap, OsuBeatmapDi
 	setOD(diff->OD);
 	setHP(diff->HP);
 	setStars(diff->starsNoMod);
+	setKeyBindType(diff->keyBindType);
 
 	setLocalOffset(diff->localoffset);
 	setOnlineOffset(diff->onlineOffset);
@@ -312,6 +314,7 @@ UString OsuUISongBrowserInfoLabel::buildDiffInfoString()
 	float OD = m_fOD;
 	float HP = m_fHP;
 	float stars = m_fStars;
+	int keyBindType = m_keyBindType;
 
 	bool areStarsInaccurate = false;
 	OsuBeatmap *beatmap = m_osu->getSelectedBeatmap();
@@ -325,6 +328,8 @@ UString OsuUISongBrowserInfoLabel::buildDiffInfoString()
 	}
 
 	UString finalString = UString::format(areStarsInaccurate ? "CS:%.3g AR:%.3g OD:%.3g HP:%.3g Stars:? (%.3g)" : "CS:%.3g AR:%.3g OD:%.3g HP:%.3g Stars:%.3g", CS, AR, OD, HP, stars);
+	const UString keyBindStr[3] = {"", " [+2k]", " [+4k]"};
+	finalString.append(keyBindStr[keyBindType]);
 	if (m_bStarsRecalculating)
 		finalString.append(" (recalculating ...)");
 

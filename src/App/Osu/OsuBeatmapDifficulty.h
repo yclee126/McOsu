@@ -182,6 +182,7 @@ public:
 	int setID;
 	bool starsWereCalculatedAccurately;
 	std::atomic<bool> semaphore; // yes, I know this is disgusting
+	int keyBindType = 0;
 
 	// timing (points) + breaks
 	TIMING_INFO getTimingInfoForTime(unsigned long positionMS);
