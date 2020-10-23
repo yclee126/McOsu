@@ -350,7 +350,10 @@ bool OsuBeatmapDifficulty::loadMetadataRaw(bool calculateStars, bool calculateSt
 						if (calculateStars)
 							curBlock = 6; // star calculation needs hitobjects
 						else
+						{
+							circleType = -1;
 							break; // stop early otherwise
+						}
 					}
 
 					switch (curBlock)
