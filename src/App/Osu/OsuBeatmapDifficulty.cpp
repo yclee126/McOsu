@@ -320,6 +320,8 @@ bool OsuBeatmapDifficulty::loadMetadataRaw(bool calculateStars, bool calculateSt
 
 			// load metadata only
 			int curBlock = -1;
+			int circleType = 0;
+			static const int keyBindMask[3] = {0b0, 0b11, 0b1111};
 			unsigned long long timingPointSortHack = 0;
 			char stringBuffer[1024];
 			while (file.canRead())
@@ -546,6 +548,7 @@ bool OsuBeatmapDifficulty::loadMetadataRaw(bool calculateStars, bool calculateSt
 								c.x = x;
 								c.y = y;
 								c.time = time;
+								circleType |= (hitSound >> 4) & keyBindMask[keyBindType];
 
 								hitcircles.push_back(c);
 							}
@@ -617,6 +620,7 @@ bool OsuBeatmapDifficulty::loadMetadataRaw(bool calculateStars, bool calculateSt
 
 									sliders.push_back(s);
 								}
+								circleType |= (hitSound >> 4) & keyBindMask[keyBindType];
 							}
 							else if (type & 0x8) // spinner
 							{
@@ -634,6 +638,8 @@ bool OsuBeatmapDifficulty::loadMetadataRaw(bool calculateStars, bool calculateSt
 					}
 				}
 			}
+			if (!circleType)
+				keyBindType = 0;
 		}
 
 		// gamemode filter
