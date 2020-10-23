@@ -19,6 +19,7 @@
 /build/materials/default/*
 !/build/materials/default/hitcircle*
 
+/apply_keybinding/*.osu
+
 .*
-*.osu
 !/.gitignore
