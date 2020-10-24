@@ -230,21 +230,22 @@ void OsuCircle::drawHitCircleOverlay(Graphics *g, OsuSkinImage *hitCircleOverlay
 
 void OsuCircle::drawHitCircle(Graphics *g, OsuSkin *skin, Vector2 pos, Color comboColor, float circleImageScale, float alpha, int circleType)
 {
-	switch(circleType)
-	{
-	case 0:
-		drawHitCircle(g, skin->getHitCircle(), pos, comboColor, circleImageScale, alpha);
-		return;
-	case 1:
-		drawHitCircle(g, skin->getHitCircle1(), pos, comboColor, circleImageScale, alpha);
-		return;
-	case 2:
-		drawHitCircle(g, skin->getHitCircle2(), pos, comboColor, circleImageScale, alpha);
-		return;
-	case 3:
-		drawHitCircle(g, skin->getHitCircle3(), pos, comboColor, circleImageScale, alpha);
-		return;
-	}
+	drawHitCircle(g, skin->getHitCircle(), pos, comboColor, circleImageScale, alpha);
+
+	g->setColor(0xffffffff);
+	g->setAlpha(alpha);
+	g->pushTransform();
+		g->scale(circleImageScale, circleImageScale);
+		g->translate(pos.x, pos.y);
+		if (circleType & 0b0001)
+			g->drawImage(skin->getHitCircle1());
+		if (circleType & 0b0010)
+			g->drawImage(skin->getHitCircle2());
+		if (circleType & 0b0100)
+			g->drawImage(skin->getHitCircle3());
+		if (circleType & 0b1000)
+			g->drawImage(skin->getHitCircle4());
+	g->popTransform();
 }
 
 

@@ -407,7 +407,7 @@ bool OsuBeatmapDifficulty::loadMetadataRaw(bool calculateStars, bool calculateSt
 								name = UString(stringBuffer);
 								name = name.trim();
 
-								// osu+2k mod version check
+								// keyBind version check
 								int verStrInd = -1;
 
 								if ((verStrInd = name.find("+2k")) != -1)
