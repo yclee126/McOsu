@@ -348,7 +348,7 @@ void OsuCircle::drawHitCircleNumber(Graphics *g, OsuSkin *skin, float numberScal
 	float digitWidthCombined = 0.0f;
 	for (int i = 0; i < digits.size(); i++)
 		digitWidthCombined += DigitWidth::getWidth(skin, digits[i]);
-	int digitOverlapCount = digits.size()-1; // inserting this line directly causes an overflow error
+	int digitOverlapCount = digits.size()-1; // inserting this line directly causes an overflow error with negative hitCircleOverlap number
 
 	g->translate(-(digitWidthCombined*numberScale - skin->getHitCircleOverlap()*digitOverlapCount*overlapScale)*0.5f + DigitWidth::getWidth(skin, (digits.size() > 0 ? digits[digits.size()-1] : 0))*numberScale*0.5f, 0);
 
