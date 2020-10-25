@@ -672,6 +672,8 @@ void Osu::draw(Graphics *g)
 				cursorPos = getScreenSize() / 2.0f;
 
 			m_hud->drawCursor(g, cursorPos, (osu_mod_fadingcursor.getBool() && !isAuto) ? fadingCursorAlpha : 1.0f, isAuto);
+
+			g->drawLine(cursorPos, beatmapStd->getAutoCursorPos());
 		}
 
 		// draw projected VR cursors for spectators

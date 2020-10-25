@@ -5,6 +5,8 @@
 // $NoKeywords: $osustd
 //===============================================================================//
 
+const bool ALWAYS_UPDATE_AUTO = true;
+
 #include "OsuBeatmapStandard.h"
 
 #include "Engine.h"
@@ -837,7 +839,7 @@ void OsuBeatmapStandard::update()
 	if (isLoading()) return; // only continue if we have loaded everything
 
 	// update auto (after having updated the hitobjects)
-	if (m_osu->getModAuto() || m_osu->getModAutopilot())
+	if (m_osu->getModAuto() || m_osu->getModAutopilot() || ALWAYS_UPDATE_AUTO)
 		updateAutoCursorPos();
 
 	// spinner detection (used by osu!stable drain, and by OsuHUD for not drawing the hiterrorbar)
@@ -1245,12 +1247,12 @@ Vector2 OsuBeatmapStandard::getCursorPos() const
 	if (OsuGameRules::osu_mod_fps.getBool() && !m_bIsPaused)
 	{
 		if (m_osu->getModAuto() || m_osu->getModAutopilot())
-			return m_vAutoCursorPos;
+			return m_vAutoCursorPos; // FPosu auto mode
 		else
-			return m_vPlayfieldCenter;
+			return m_vPlayfieldCenter; // FPosu user mode
 	}
 	else if (m_osu->getModAuto() || m_osu->getModAutopilot())
-		return m_vAutoCursorPos;
+		return m_vAutoCursorPos; // standard auto mode
 	else
 	{
 		Vector2 pos = engine->getMouse()->getPos();
@@ -1590,7 +1592,7 @@ void OsuBeatmapStandard::updateAutoCursorPos()
 			}
 		}
 	}
-	else if (m_osu->getModAutopilot())
+	else if (m_osu->getModAutopilot() || ALWAYS_UPDATE_AUTO)
 	{
 		for (int i=0; i<m_hitobjects.size(); i++)
 		{

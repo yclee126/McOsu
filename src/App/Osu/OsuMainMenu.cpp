@@ -36,7 +36,7 @@
 #include "CBaseUIContainer.h"
 #include "CBaseUIButton.h"
 
-#define MCOSU_VERSION_TEXT "[keyBind v1.0] Version"
+#define MCOSU_VERSION_TEXT "[keyBind v1.1] Version"
 #define MCOSU_BANNER_TEXT "-- WARNING: Will run out of memory and crash! Use HBL NSP! --"
 UString OsuMainMenu::MCOSU_MAIN_BUTTON_TEXT = UString("McOsu");
 UString OsuMainMenu::MCOSU_MAIN_BUTTON_SUBTEXT = UString("Practice Client");

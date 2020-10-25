@@ -34,6 +34,7 @@ public:
 
 	// cursor
 	Vector2 getCursorPos() const;
+	inline Vector2 getAutoCursorPos() const {return m_vAutoCursorPos;}
 	Vector2 getFirstPersonCursorDelta() const;
 	inline Vector2 getContinueCursorPoint() const {return m_vContinueCursorPoint;}
 
