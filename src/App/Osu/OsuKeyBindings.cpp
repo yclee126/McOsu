@@ -12,6 +12,11 @@
 ConVar OsuKeyBindings::LEFT_CLICK("osu_key_left_click", (int)KEY_Z);
 ConVar OsuKeyBindings::RIGHT_CLICK("osu_key_right_click", (int)KEY_X);
 
+ConVar OsuKeyBindings::K1("osu_key_1", (int)KEY_Z);
+ConVar OsuKeyBindings::K2("osu_key_2", (int)KEY_X);
+ConVar OsuKeyBindings::K3("osu_key_3", (int)KEY_C);
+ConVar OsuKeyBindings::K4("osu_key_4", (int)KEY_V);
+
 ConVar OsuKeyBindings::INCREASE_SPEED("osu_key_mania_increase_speed", (int)KEY_RIGHT);
 ConVar OsuKeyBindings::DECREASE_SPEED("osu_key_mania_decrease_speed", (int)KEY_LEFT);
 
@@ -52,6 +57,11 @@ ConVar OsuKeyBindings::MOD_SCOREV2("osu_key_mod_scorev2", (int)KEY_B);
 std::vector<ConVar*> OsuKeyBindings::ALL = {
 	&OsuKeyBindings::LEFT_CLICK,
 	&OsuKeyBindings::RIGHT_CLICK,
+
+	&OsuKeyBindings::K1,
+	&OsuKeyBindings::K2,
+	&OsuKeyBindings::K3,
+	&OsuKeyBindings::K4,
 
 	&OsuKeyBindings::INCREASE_SPEED,
 	&OsuKeyBindings::DECREASE_SPEED,

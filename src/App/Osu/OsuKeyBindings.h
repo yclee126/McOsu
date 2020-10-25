@@ -16,6 +16,11 @@ public:
 	static ConVar LEFT_CLICK;
 	static ConVar RIGHT_CLICK;
 
+	static ConVar K1;
+	static ConVar K2;
+	static ConVar K3;
+	static ConVar K4;
+
 	static ConVar INCREASE_SPEED;
 	static ConVar DECREASE_SPEED;
 

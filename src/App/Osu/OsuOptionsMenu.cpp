@@ -860,9 +860,14 @@ OsuOptionsMenu::OsuOptionsMenu(Osu *osu) : OsuScreenBackable(osu)
 	addSpacer();
 	const UString keyboardSectionTags = "keyboard keys binds keybinds";
 	CBaseUIElement *subSectionKeyboard = addSubSection("Keyboard", keyboardSectionTags);
-	addSubSection("Keys - osu! Standard Mode", keyboardSectionTags);
-	addKeyBindButton("Left Click", &OsuKeyBindings::LEFT_CLICK);
-	addKeyBindButton("Right Click", &OsuKeyBindings::RIGHT_CLICK);
+	addSubSection("Keys - osu! Standard Mode (+2k mod)", keyboardSectionTags);
+	addKeyBindButton("Left Click (K1)", &OsuKeyBindings::LEFT_CLICK);
+	addKeyBindButton("Right Click (K2)", &OsuKeyBindings::RIGHT_CLICK);
+	addSubSection("Keys - +4k mod", keyboardSectionTags);
+	addKeyBindButton("K1", &OsuKeyBindings::K1);
+	addKeyBindButton("K2", &OsuKeyBindings::K2);
+	addKeyBindButton("K3", &OsuKeyBindings::K3);
+	addKeyBindButton("K4", &OsuKeyBindings::K4);
 	addSubSection("Keys - In-Game", keyboardSectionTags);
 	addKeyBindButton("Game Pause", &OsuKeyBindings::GAME_PAUSE);
 	addKeyBindButton("Skip Cutscene", &OsuKeyBindings::SKIP_CUTSCENE);
